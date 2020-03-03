@@ -25,7 +25,7 @@ export default function CourseListItem(props) {
         <Avatar alt={props.faculty} src={props.img}/>
       </ListItemAvatar>
       <ListItemText 
-        primary={props.code + " --- " + props.name} 
+        primary={props.code + " --- " + props.name + " (" + props.credit + ")"} 
         secondary={"by " + props.faculty}
       />
       <Typography>

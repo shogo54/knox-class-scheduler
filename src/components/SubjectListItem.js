@@ -32,6 +32,7 @@ export default function SubjectListItem(props) {
           code={el.code}
           img={el.img}
           faculty={el.faculty}
+          credit={el.credit}
           period={el.period}
           days={el.days}
         />
