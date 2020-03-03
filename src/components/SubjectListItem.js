@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -9,14 +8,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 
 import CourseListItem from './CourseListItem';
 
-const useStyles = makeStyles(theme => ({
-  nested: {
-    paddingLeft: theme.spacing(4),
-  },
-}));
-
 export default function SubjectListItem(props) {
-  const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {

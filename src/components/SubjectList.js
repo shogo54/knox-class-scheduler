@@ -8,7 +8,9 @@ import SubjectListItem from './SubjectListItem';
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    maxWidth: 600,
+    maxWidth: 600,  
+    maxHeight: '99vh',
+    overflow: 'auto',
     backgroundColor: theme.palette.background.paper,
   },
 }));
