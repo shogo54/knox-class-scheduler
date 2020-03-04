@@ -1,12 +1,13 @@
 import React from 'react';
+import Container from '@material-ui/core/Container';
 
 import './App.css';
-import SubjectList from './components/SubjectList'
+import SubjectList from './components/SubjectList';
 
-function App() {
+export default function App() {
   return (
-    <SubjectList />
+    <Container>
+      <SubjectList />
+    </Container>
   );
 }
-
-export default App;
