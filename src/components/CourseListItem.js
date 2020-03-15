@@ -5,6 +5,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles(theme => ({
   nested: {
@@ -15,6 +17,15 @@ const useStyles = makeStyles(theme => ({
 export default function CourseListItem(props) {
 
   const classes = useStyles();
+
+  let deleteButton = null;
+  if(props.currentCourse){
+    deleteButton = (
+      <IconButton edge="end" aria-label="delete">
+        <DeleteIcon />
+      </IconButton>
+    );
+  }
 
   return (
     <ListItem 
@@ -31,6 +42,7 @@ export default function CourseListItem(props) {
       <Typography>
         {props.days + " " + props.period}
       </Typography>
+      {deleteButton}
     </ListItem>
   );
 }
