@@ -1,35 +1,7 @@
 import * as actionTypes from './actions';
 
 const initialState = {
-  currCourses: [
-    {
-      name: "Interactive Design",
-      code: "CS 335",
-      img: "images/avatars/jspacco.jpg",
-      faculty: "Jaime Spacco & Tim Stedman",
-      credit: "1",
-      period: "3,4",
-      days: "MW",
-    },
-    {
-      name: "Full-stack Web Dev Practicum",
-      code: "CS 395E",
-      img: "",
-      faculty: "Staff",
-      credit: "1",
-      period: "2:40-5pm",
-      days: "TT",
-    },
-    {
-      name: "Cryptography & Computer Security",
-      code: "CS 330",
-      img: "images/avatars/dbunde.jpg",
-      faculty: "David Bunde",
-      credit: "1",
-      period: "3",
-      days: "MWF",
-    },
-  ],
+  currCourses: [],
 
   subjects: [
     {
