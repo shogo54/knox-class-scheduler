@@ -11,8 +11,8 @@ import Title from './Title';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: 400,
-    height: 600,
+    width: 450,
+    height: 620,
     background: 'white',
     marginTop: 15,
     marginBottom: 15,
@@ -34,12 +34,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const currCourseSelector = state => state.currCourses;
+const currCoursesSelector = state => state.currCourses;
+const currCreditsSelector = state => state.currCredits;
 
 export default function CurrentCourseList() {
   const classes = useStyles();
 
-  const currCourses = useSelector(currCourseSelector);
+  const currCourses = useSelector(currCoursesSelector);
+  const currCredits = useSelector(currCreditsSelector);
   const dispatch = useDispatch();
 
   const renderCurrentCources = () => {
@@ -70,6 +72,7 @@ export default function CurrentCourseList() {
       <Title>
         Current Courses
       </Title>
+      <Title small>Total credit: {currCredits}</Title>
       <List className={classes.list}>
         {renderCurrentCources()}
       </List>

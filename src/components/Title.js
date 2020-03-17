@@ -8,7 +8,6 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     background: '#3567CC',
     color: 'white',
-    fontSize: 24,
     padding: 5,
   }
 }));
@@ -17,7 +16,7 @@ export default function Title(props) {
   const classes = useStyles();
 
   return (
-    <Typography className={classes.subheader} component="h2" variant="h6" color="primary" >
+    <Typography className={classes.subheader} variant={(props.small)?"h6":"h5"} >
       {props.children}
     </Typography>
   );

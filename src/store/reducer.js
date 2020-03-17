@@ -2,7 +2,7 @@ import * as actionTypes from './actions';
 
 const initialState = {
   currCourses: [],
-
+  currCredits: 0,
   subjects: [
     {
       subject: "Africana Studies",
@@ -209,6 +209,7 @@ const reducer = (state = initialState, action) => {
       }else{
         return {
           ...state,
+          currCredits: state.currCredits + parseFloat(addedCourse.credit),
           courses: state.courses.map((course) => {
             if(course.code === action.courseCode){
               return {
@@ -226,6 +227,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.REMOVE_COURSE:
       return {
         ...state,
+        currCredits: state.currCredits - parseFloat(state.currCourses.find(course => course.code===action.courseCode).credit),
         courses: state.courses.map((course) => {
           if(course.code === action.courseCode){
             return {

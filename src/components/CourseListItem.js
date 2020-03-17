@@ -29,7 +29,7 @@ export default function CourseListItem(props) {
   const dispatch = useDispatch();
 
   let deleteButton = null;
-  let courseName = props.code;
+  let courseName = "";
 
   if(props.isCurrCourse){
     deleteButton = (
@@ -42,8 +42,10 @@ export default function CourseListItem(props) {
       </IconButton>
     );
 
+    courseName = props.code + " (" + props.credit + ")";
+
   }else{
-    courseName += " --- " + props.name + " (" + props.credit + ")";
+    courseName = props.code + " --- " + props.name + " (" + props.credit + ")";
   }
 
   return (
