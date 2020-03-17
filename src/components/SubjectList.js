@@ -1,145 +1,34 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
+import Box from '@material-ui/core/Box';
 
 import SubjectListItem from './SubjectListItem';
+import Title from './Title';
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    maxWidth: 600,  
-    maxHeight: '99vh',
+    maxWidth: 700,
+    margin: 15,
+  },
+  list: {
+    maxHeight: '85vh',
     overflow: 'auto',
     backgroundColor: theme.palette.background.paper,
+    padding: 0,
   },
 }));
+
+const subjectsSelector = state => state.subjects;
+const coursesSelector = state => state.courses;
 
 export default function SubjectList() {
   const classes = useStyles();
 
-  const subjects = [
-    {
-      subject: "Africana Studies",
-      courses: [],
-    },
-    {
-      subject: "American Studies",
-      courses: [],
-    },
-    {
-      subject: "Anthoropology & Sociology",
-      courses: [],
-    },
-    {
-      subject: "Art and Art History",
-      courses: [],
-    },
-    {
-      subject: "Arts Administration",
-      courses: [],
-    },
-    {
-      subject: "Asian Studies",
-      courses: [],
-    },
-    {
-      subject: "Biochemistry",
-      courses: [],
-    },
-    {
-      subject: "Biology",
-      courses: [],
-    },
-    {
-      subject: "Business and Management",
-      courses: [],
-    },
-    {
-      subject: "Chemistry",
-      courses: [],
-    },
-    {
-      subject: "Chinese",
-      courses: [],
-    },
-    {
-      subject: "Classics",
-      courses: [],
-    },
-    {
-      subject: "Computer Science",
-      courses: [
-        {
-          name: "Program Design & Methodology",
-          code: "CS 142",
-          img: "images/avatars/dbunde.jpg",
-          faculty: "David Bunde",
-          credit: "1",
-          period: "2",
-          days: "MWF",
-        },
-        {
-          name: "Applied Data Structures",
-          code: "CS 220",
-          img: "images/avatars/jspacco.jpg",
-          faculty: "Jaime Spacco",
-          credit: "1",
-          period: "6",
-          days: "MWTF",
-        },
-        {
-          name: "Software Engineering",
-          code: "CS 322",
-          img: "images/avatars/mmcgill.jpg",
-          faculty: "Monica McGill",
-          credit: "1",
-          period: "5s",
-          days: "TT",
-        },
-        {
-          name: "Cryptography & Computer Security",
-          code: "CS 330",
-          img: "images/avatars/dbunde.jpg",
-          faculty: "David Bunde",
-          credit: "1",
-          period: "3",
-          days: "MWF",
-        },
-        {
-          name: "Interactive Design",
-          code: "CS 335",
-          img: "images/avatars/jspacco.jpg",
-          faculty: "Jaime Spacco & Tim Stedman",
-          credit: "1",
-          period: "3,4",
-          days: "MW",
-        },
-        {
-          name: "Full-stack Web Dev Practicum",
-          code: "CS 395E",
-          img: "",
-          faculty: "Staff",
-          credit: "1",
-          period: "2:40-5pm",
-          days: "TT",
-        },
-      ],
-    },
-    {
-      subject: "Center for Teaching and Learning",
-      courses: [],
-    },
-    {
-      subject: "Dance",
-      courses: [],
-    },
-    {
-      subject: "Economics",
-      courses: [],
-    },
-
-  ];
+  const subjects = useSelector(subjectsSelector);
+  const courses = useSelector(coursesSelector);
 
   const renderSubjects = () => {
     return subjects.map(el => {
@@ -147,24 +36,23 @@ export default function SubjectList() {
         <SubjectListItem 
           key={el.id} 
           name={el.subject} 
-          courses={el.courses}
+          courses={courses.filter(course => course.subject === el.subjectCode)}
         />
       );
     });
   }
 
   return (
-    <List
-      component="nav"
-      aria-labelledby="nested-list-subheader"
-      subheader={
-        <ListSubheader component="div" id="nested-list-subheader">
-          Class Schecule for Spring 2020
-        </ListSubheader>
-      }
-      className={classes.root}
-    >
-      {renderSubjects()}
-    </List> 
+    <Box className={classes.root}>
+      <Title>
+        Class Schecule for Spring 2020
+      </Title>
+      <List
+        component="nav"
+        className={classes.list}
+      >
+        {renderSubjects()}
+      </List>
+    </Box>   
   );
 }

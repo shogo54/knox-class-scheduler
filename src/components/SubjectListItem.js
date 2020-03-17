@@ -27,7 +27,8 @@ export default function SubjectListItem(props) {
           credit={el.credit}
           period={el.period}
           days={el.days}
-          currentCourse={true}
+          isCurrCourse={false}
+          added={el.added}
         />
       );
     });

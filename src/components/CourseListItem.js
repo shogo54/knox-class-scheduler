@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -8,40 +9,64 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 
+import * as actionTypes from '../store/actions';
+
 const useStyles = makeStyles(theme => ({
   nested: {
-    paddingLeft: theme.spacing(4),
+    paddingLeft: theme.spacing(2),
+  },
+  added: {
+    background: '#f0f8ff',
+    '&:hover': {
+      backgroundColor: '#E3F2FF',
+    },
   },
 }));
 
 export default function CourseListItem(props) {
-
   const classes = useStyles();
 
+  const dispatch = useDispatch();
+
   let deleteButton = null;
-  if(props.currentCourse){
+  let courseName = props.code;
+
+  if(props.isCurrCourse){
     deleteButton = (
-      <IconButton edge="end" aria-label="delete">
+      <IconButton 
+        edge="end" 
+        aria-label="delete"
+        onClick={()=>props.onRemove(props.code)}
+      >
         <DeleteIcon />
       </IconButton>
     );
+
+  }else{
+    courseName += " --- " + props.name + " (" + props.credit + ")";
   }
 
   return (
-    <ListItem 
-      button 
-      className={classes.nested}
+    <ListItem
+      key={props.key}
+      divider
     >
-      <ListItemAvatar>
-        <Avatar alt={props.faculty} src={props.img}/>
-      </ListItemAvatar>
-      <ListItemText 
-        primary={props.code + " --- " + props.name + " (" + props.credit + ")"} 
-        secondary={"by " + props.faculty}
-      />
-      <Typography>
-        {props.days + " " + props.period}
-      </Typography>
+      <ListItem 
+        button 
+        onClick={() => dispatch({type: actionTypes.ADD_COURSE, courseCode: props.code})}
+        className={classes.nested, (props.added)? classes.added: null}
+      >
+        <ListItemAvatar>
+          <Avatar alt={props.faculty} src={props.img}/>
+        </ListItemAvatar>
+        <ListItemText 
+          primary={courseName} 
+          secondary={"by " + props.faculty}
+        />
+        <Typography>
+          {props.days + " " + props.period}
+        </Typography>
+      </ListItem>
       {deleteButton}
     </ListItem>
   );
