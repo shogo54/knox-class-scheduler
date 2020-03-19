@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
-  subheader: {
+  title: {
     textAlign: 'center',
     background: '#3567CC',
     color: 'white',
@@ -16,9 +17,14 @@ export default function Title(props) {
   const classes = useStyles();
 
   return (
-    <Typography className={classes.subheader} variant={(props.small)?"h6":"h5"} >
-      {props.children}
-    </Typography>
+    <Box className={classes.title}>
+      <Typography variant='h5'>
+        {props.children}
+      </Typography>
+      <Typography variant='h6'>
+        {props.subTitle}
+      </Typography>
+    </Box>
   );
 }
 

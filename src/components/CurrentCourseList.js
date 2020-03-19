@@ -69,10 +69,9 @@ export default function CurrentCourseList() {
 
   return(
     <Box className={classes.root}>
-      <Title>
+      <Title subTitle={'total credit: ' + currCredits}>
         Current Courses
       </Title>
-      <Title small>Total credit: {currCredits}</Title>
       <List className={classes.list}>
         {renderCurrentCources()}
       </List>
