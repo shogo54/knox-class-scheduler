@@ -36,7 +36,7 @@ export default function CourseListItem(props) {
       <IconButton 
         edge="end" 
         aria-label="delete"
-        onClick={()=>props.onRemove(props.code)}
+        onClick={()=>dispatch({type: actionTypes.REMOVE_COURSE, courseCode: props.code})}
       >
         <DeleteIcon />
       </IconButton>
@@ -48,6 +48,14 @@ export default function CourseListItem(props) {
     courseName = props.code + " --- " + props.name + " (" + props.credit + ")";
   }
 
+  const addOrRemove = () => {
+    if(props.added){
+      dispatch({type: actionTypes.REMOVE_COURSE, courseCode: props.code});
+    }else{
+      dispatch({type: actionTypes.ADD_COURSE, courseCode: props.code});
+    }
+  };
+
   return (
     <ListItem
       key={props.key}
@@ -55,7 +63,7 @@ export default function CourseListItem(props) {
     >
       <ListItem 
         button 
-        onClick={() => dispatch({type: actionTypes.ADD_COURSE, courseCode: props.code})}
+        onClick={addOrRemove}
         className={classes.nested, (props.added)? classes.added: null}
       >
         <ListItemAvatar>
