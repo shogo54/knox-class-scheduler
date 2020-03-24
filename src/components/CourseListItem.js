@@ -4,10 +4,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Box from '@material-ui/core/Box';
 
 import * as actionTypes from '../store/actions';
 
@@ -33,13 +35,15 @@ export default function CourseListItem(props) {
 
   if(props.isCurrCourse){
     deleteButton = (
-      <IconButton 
-        edge="end" 
-        aria-label="delete"
-        onClick={()=>dispatch({type: actionTypes.REMOVE_COURSE, courseCode: props.code})}
-      >
-        <DeleteIcon />
-      </IconButton>
+      <ListItemSecondaryAction>
+        <IconButton 
+          edge="end" 
+          aria-label="delete"
+          onClick={()=>dispatch({type: actionTypes.REMOVE_COURSE, courseCode: props.code})}
+        >
+          <DeleteIcon />
+        </IconButton>
+      </ListItemSecondaryAction>
     );
 
     courseName = props.code + " (" + props.credit + ")";
@@ -57,14 +61,13 @@ export default function CourseListItem(props) {
   };
 
   return (
-    <ListItem
-      key={props.key}
-      divider
-    >
+    <Box className={classes.nested}>
       <ListItem 
+        key={props.key}
         button 
+        divider
         onClick={addOrRemove}
-        className={classes.nested, (props.added)? classes.added: null}
+        className={(props.added)? classes.added: null}
       >
         <ListItemAvatar>
           <Avatar alt={props.faculty} src={props.img}/>
@@ -76,8 +79,8 @@ export default function CourseListItem(props) {
         <Typography>
           {props.days + " " + props.period}
         </Typography>
+        {deleteButton}
       </ListItem>
-      {deleteButton}
-    </ListItem>
+    </Box>
   );
 }
