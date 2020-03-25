@@ -61,7 +61,7 @@ export default function CourseListItem(props) {
   };
 
   return (
-    <Box className={classes.nested}>
+    <Box className={(props.isCurrCourse)? null: classes.nested}>
       <ListItem 
         key={props.key}
         button 
@@ -76,9 +76,10 @@ export default function CourseListItem(props) {
           primary={courseName} 
           secondary={"by " + props.faculty}
         />
-        <Typography>
+        <ListItemText >
           {props.days + " " + props.period}
-        </Typography>
+        </ListItemText>
+        
         {deleteButton}
       </ListItem>
     </Box>
