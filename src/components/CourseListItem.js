@@ -23,6 +23,10 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: '#E3F2FF',
     },
   },
+  coursePeriod: {
+    textAlign: 'right',
+    paddingRight: theme.spacing(2),
+  }
 }));
 
 export default function CourseListItem(props) {
@@ -76,7 +80,7 @@ export default function CourseListItem(props) {
           primary={courseName} 
           secondary={"by " + props.faculty}
         />
-        <ListItemText >
+        <ListItemText className={classes.coursePeriod}>
           {props.days + " " + props.period}
         </ListItemText>
         
