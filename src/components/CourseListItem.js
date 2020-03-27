@@ -52,25 +52,12 @@ export default function CourseListItem(props) {
 
   const dispatch = useDispatch();
 
-  let deleteButton = null;
+  let courseItemButton = null;
   let courseName = "";
   let modalButton = null;
 
   if(props.isCurrCourse){
-    deleteButton = (
-      <ListItemSecondaryAction>
-        <IconButton 
-          edge="end" 
-          aria-label="delete"
-          onClick={()=>dispatch({type: actionTypes.REMOVE_COURSE, courseCode: props.code})}
-        >
-          <DeleteIcon />
-        </IconButton>
-      </ListItemSecondaryAction>
-    );
-
     courseName = props.code + " (" + props.credit + ")";
-
   }else{
     courseName = props.code + " --- " + props.name + " (" + props.credit + ")";
   }
@@ -104,6 +91,17 @@ export default function CourseListItem(props) {
         Remove from My Course
       </Button>
     );
+    courseItemButton = (
+      <ListItemSecondaryAction>
+        <IconButton 
+          edge="end" 
+          aria-label="delete"
+          onClick={()=>dispatch({type: actionTypes.REMOVE_COURSE, courseCode: props.code})}
+        >
+          <DeleteIcon />
+        </IconButton>
+      </ListItemSecondaryAction>
+    );
   }else{
     modalButton = (
       <Button
@@ -115,6 +113,17 @@ export default function CourseListItem(props) {
       >
         Add to My Course
       </Button>
+    );
+    courseItemButton = (
+      <ListItemSecondaryAction>
+        <IconButton 
+          edge="end" 
+          aria-label="add"
+          onClick={()=>dispatch({type: actionTypes.ADD_COURSE, courseCode: props.code})}
+        >
+          <AddIcon />
+        </IconButton>
+      </ListItemSecondaryAction>
     );
   }
 
@@ -137,7 +146,7 @@ export default function CourseListItem(props) {
         <ListItemText className={classes.coursePeriod}>
           {props.days + " " + props.period}
         </ListItemText>
-        {deleteButton}
+        {courseItemButton}
       </ListItem>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -155,7 +164,7 @@ export default function CourseListItem(props) {
           <Box className={classes.paper}>
             <h2 id="transition-modal-title">{courseName}</h2>
             <h3 id="">by {props.faculty}</h3>
-            <p id="transition-modal-description">{props.description}</p>
+            <p id="transition-modal-description">{(props.description)? props.description: "No descrption is provided."}</p>
             <Box display="flex" justifyContent="flex-end">
               {modalButton}
             </Box>
