@@ -53,6 +53,6 @@ export default function SubjectList() {
       >
         {renderSubjects()}
       </List>
-    </Box>   
+    </Box>
   );
 }

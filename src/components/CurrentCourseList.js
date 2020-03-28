@@ -58,6 +58,8 @@ export default function CurrentCourseList() {
             period={el.period}
             days={el.days}
             isCurrCourse={true}
+            added={el.added}
+            description={el.description}
           />
         );
       });

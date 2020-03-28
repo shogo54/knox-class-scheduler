@@ -144,6 +144,7 @@ const initialState = {
       credit: "1",
       period: "2",
       days: "MWF",
+      description: "A continued study of principles of computer science and programming. This course teaches students how to design increasingly complex programs in a manageable way, using abstract data structures, data encapsulation, and other software engineering concepts. It also addresses some of the classic algorithms in computer science and begins studying how to analyze their complexity. This course is currently taught using Java. QSR; Prerequisite(s): CS 141 or permission of the instructor; QL; QR; Offered every winter and spring; Staff",
     },
     {
       subject: "CS",
@@ -154,6 +155,7 @@ const initialState = {
       credit: "1",
       period: "6",
       days: "MWTF",
+      description: "Solve real-world problems by applying the keydata structures covered in CS 142 to real worlddata. Some possible problems to solve includedetecting likely plagiarism in a large collection ofdocuments, evaluating possible outcomes in boardgames using graphs, determining the likelihoodan email message is \"spam\", and building a datamodel for a database. Prereq: CS 142 or permissionof the instructor; Offered every year; J. Spacco",
     },
     {
       subject: "CS",
@@ -164,6 +166,7 @@ const initialState = {
       credit: "1",
       period: "5s",
       days: "TT",
+      description: "Building large-scale computing systems usesrequirements analysis, project planning, extensivedocumentation, cooperative teamwork, anddesign techniques to decompose a system intoindependent units. The course covers all the phases of large-scale system development: software process, estimation and scheduling, configuration management, and project manage-ment. Students typically work together in teamsto build a term-long project, gaining practicalexperience with developing larger systems. Prereq:CS 292; O; W; QL; Typically offered alternate years;M. McGill",
     },
     {
       subject: "CS",
@@ -174,6 +177,7 @@ const initialState = {
       credit: "1",
       period: "3",
       days: "MWF",
+      description: "With the increasing ubiquity of computers andcomputer networks, issues of privacy and securityare becoming increasingly important for comput-ing professionals. This course introduces studentsto a number of related areas in computer security.Topics covered include classical cryptography,public-key cryptography, block and streamciphers, file system security, network security,Internet and web-based security, and design principles behind cryptographic systems. In addition, the course examines social, political,legal, and ethical issues related to security systems.Prereq: CS 214; O; QL; Typically offered alternateyears; STAFF",
     },
     {
       subject: "CS",
@@ -207,6 +211,7 @@ const reducer = (state = initialState, action) => {
       if(addedCourse.added == true){
         return state;
       }else{
+        addedCourse.added = true;
         return {
           ...state,
           currCredits: state.currCredits + parseFloat(addedCourse.credit),

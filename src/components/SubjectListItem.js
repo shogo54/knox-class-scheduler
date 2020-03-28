@@ -29,6 +29,7 @@ export default function SubjectListItem(props) {
           days={el.days}
           isCurrCourse={false}
           added={el.added}
+          description={el.description}
         />
       );
     });
