@@ -8,14 +8,15 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import DeleteIcon from '@material-ui/icons/Delete';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import AddIcon from '@material-ui/icons/Add';
 
 import * as actionTypes from '../store/actions';
-import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   nested: {
@@ -42,7 +43,7 @@ const useStyles = makeStyles(theme => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     width: 700,
-  },
+  }
 }));
 
 export default function CourseListItem(props) {
@@ -85,7 +86,6 @@ export default function CourseListItem(props) {
         variant="contained"
         color="secondary"
         onClick={handleAddOrRemove}
-        className={classes.button}
         startIcon={<DeleteIcon />}
       >
         Remove from My Course
@@ -94,8 +94,9 @@ export default function CourseListItem(props) {
     courseItemButton = (
       <ListItemSecondaryAction>
         <IconButton 
-          edge="end" 
+          edge="end"
           aria-label="delete"
+          color="secondary"
           onClick={()=>dispatch({type: actionTypes.REMOVE_COURSE, courseCode: props.code})}
         >
           <DeleteIcon />
@@ -108,7 +109,6 @@ export default function CourseListItem(props) {
         variant="contained"
         color="primary"
         onClick={handleAddOrRemove}
-        className={classes.button}
         startIcon={<AddIcon />}
       >
         Add to My Course
@@ -119,9 +119,10 @@ export default function CourseListItem(props) {
         <IconButton 
           edge="end" 
           aria-label="add"
+          color="primary"
           onClick={()=>dispatch({type: actionTypes.ADD_COURSE, courseCode: props.code})}
         >
-          <AddIcon />
+          <AddCircleIcon />
         </IconButton>
       </ListItemSecondaryAction>
     );
