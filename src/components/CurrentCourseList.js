@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import ClearIcon from '@material-ui/icons/Clear';
 
 import CourseListItem from './CourseListItem';
 import Title from './Title';
@@ -11,14 +13,19 @@ import Title from './Title';
 const useStyles = makeStyles(theme => ({
   root: {
     width: 450,
-    height: 620,
-    background: 'white',
+    height: 560,
+    background: '#3567CC',
     marginTop: 15,
     marginBottom: 15,
     marginRigth: 15,
+    padding: 10,
   },
   list: {
-    padding: 0,
+    maxHeight: 440,
+    background: 'white',
+    paddingBottom: 0,
+    paddingTop: 0,
+    marginBottom: 10,
   },
   subheader: {
     textAlign: 'center',
@@ -27,7 +34,8 @@ const useStyles = makeStyles(theme => ({
     fontSize: 24,
   },
   subText: {
-    paddingTop: 20,
+    paddingTop: 23,
+    paddingBottom: 23,
     textAlign: 'center',
     fontSize: 18,
   }
@@ -41,6 +49,22 @@ export default function CurrentCourseList() {
 
   const currCourses = useSelector(currCoursesSelector);
   const currCredits = useSelector(currCreditsSelector);
+
+  let removeAllButton = null; 
+
+  if(currCourses.length > 0){
+    removeAllButton = (
+      <Box display="flex" justifyContent="flex-end">
+        <Button
+          variant="contained"
+          color="secondary"
+          startIcon={<ClearIcon />}
+        >
+          Remove All Courses
+        </Button>
+      </Box>
+    );
+  }
 
   const renderCurrentCources = () => {
     if (currCourses.length === 0){
@@ -74,6 +98,7 @@ export default function CurrentCourseList() {
       <List className={classes.list}>
         {renderCurrentCources()}
       </List>
+      {removeAllButton}
     </Box>
   );
 }
