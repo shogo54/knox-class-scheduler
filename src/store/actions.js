@@ -1,2 +1,3 @@
 export const ADD_COURSE = 'ADD_COURSE';
 export const REMOVE_COURSE = 'REMOVE_COURSE';
+export const REMOVE_ALL_COURSES = 'REMOVE_ALL_COURSES';

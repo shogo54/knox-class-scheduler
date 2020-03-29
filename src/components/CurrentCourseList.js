@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
@@ -9,6 +9,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 
 import CourseListItem from './CourseListItem';
 import Title from './Title';
+import * as actionTypes from '../store/actions';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -50,6 +51,8 @@ export default function CurrentCourseList() {
   const currCourses = useSelector(currCoursesSelector);
   const currCredits = useSelector(currCreditsSelector);
 
+  const dispatch = useDispatch();
+
   let removeAllButton = null; 
 
   if(currCourses.length > 0){
@@ -58,6 +61,7 @@ export default function CurrentCourseList() {
         <Button
           variant="contained"
           color="secondary"
+          onClick={() => dispatch({type: actionTypes.REMOVE_ALL_COURSES})}
           startIcon={<ClearIcon />}
         >
           Remove All Courses
