@@ -2,7 +2,7 @@ import React from 'react';
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import { red } from '@material-ui/core/colors';
+import { green, red } from '@material-ui/core/colors';
 
 import './App.css';
 import SubjectList from './components/SubjectList';
@@ -18,9 +18,11 @@ const useStyles = makeStyles(theme => ({
 const theme = createMuiTheme({
   palette:{
     primary: {
-      main: '#43a047',
+      main: green[600],
     },
-    secondary: red,
+    secondary: {
+      main: red[600],
+    },
   },
 });
 
