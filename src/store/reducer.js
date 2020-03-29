@@ -245,6 +245,23 @@ const reducer = (state = initialState, action) => {
         }),
         currCourses: state.currCourses.filter(course => course.code !== action.courseCode)
       }
+
+    case actionTypes.REMOVE_ALL_COURSES:
+      return {
+        ...state,
+        currCredits: 0,
+        courses: state.courses.map((course) => {
+          if(course.added === true){
+            return {
+              ...course,
+              added: false,
+            }
+          }else{
+            return course
+          }
+        }),
+        currCourses: [],
+      }
   }
   return state;
 }
