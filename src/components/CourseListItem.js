@@ -18,6 +18,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import AddIcon from '@material-ui/icons/Add';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import SchoolIcon from '@material-ui/icons/School';
+import CloseIcon from '@material-ui/icons/Close';
 
 import * as actionTypes from '../store/actions';
 
@@ -54,6 +55,12 @@ const useStyles = makeStyles(theme => ({
     '& > *': {
       margin: theme.spacing(0.5),
     },
+  },
+  closeButton: {
+    position: 'absolute',
+    right: theme.spacing(1),
+    top: theme.spacing(1),
+    color: theme.palette.grey[500],
   },
 }));
 
@@ -174,17 +181,20 @@ export default function CourseListItem(props) {
       >
         <Fade in={open}>
           <Box className={classes.paper}>
-            <h2 id="transition-modal-title">{props.code + " --- " + props.name}</h2>
+            <Box>
+              <h2 id="transition-modal-title">{props.code + " --- " + props.name}</h2>
+              <IconButton aria-label="close" className={classes.closeButton} onClick={handleClose}>
+                <CloseIcon />
+              </IconButton>
+            </Box>
             <h3 id="transition-modal-faculty">by {props.faculty}</h3>
             <Box className={classes.chips}>
               <Chip
                 icon={<AccessTimeIcon />}
-                r={2}
                 label={props.days + " " + props.period}
               />
               <Chip
-                icon={<SchoolIcon />} 
-                r={2}
+                icon={<SchoolIcon />}
                 label={parseFloat(props.credit).toFixed(1)}             
               />
             </Box>
