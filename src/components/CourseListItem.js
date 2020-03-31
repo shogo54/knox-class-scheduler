@@ -57,9 +57,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   closeButton: {
-    position: 'absolute',
-    right: theme.spacing(1),
-    top: theme.spacing(1),
+    float: 'right',
     color: theme.palette.grey[500],
   },
 }));
@@ -181,12 +179,10 @@ export default function CourseListItem(props) {
       >
         <Fade in={open}>
           <Box className={classes.paper}>
-            <Box>
-              <h2 id="transition-modal-title">{props.code + " --- " + props.name}</h2>
-              <IconButton aria-label="close" className={classes.closeButton} onClick={handleClose}>
-                <CloseIcon />
-              </IconButton>
-            </Box>
+            <IconButton aria-label="close" className={classes.closeButton} onClick={handleClose}>
+              <CloseIcon />
+            </IconButton>
+            <h2 id="transition-modal-title">{props.code + " --- " + props.name}</h2>
             <h3 id="transition-modal-faculty">by {props.faculty}</h3>
             <Box className={classes.chips}>
               <Chip

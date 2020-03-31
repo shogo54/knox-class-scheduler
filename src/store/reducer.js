@@ -208,7 +208,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.ADD_COURSE:
       const addedCourse = state.courses.find(course => course.code === action.courseCode);
 
-      if(addedCourse.added == true){
+      if(addedCourse.added === true){
         return state;
       }else{
         addedCourse.added = true;
@@ -245,8 +245,12 @@ const reducer = (state = initialState, action) => {
         }),
         currCourses: state.currCourses.filter(course => course.code !== action.courseCode)
       }
+    
+    default: 
+      return{
+        ...state,
+      }
   }
-  return state;
 }
 
 export default reducer;
