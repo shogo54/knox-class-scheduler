@@ -261,11 +261,12 @@ const reducer = (state = initialState, action) => {
           }
         }),
         currCourses: [],
-        
-      default: 
-        return{
-          ...state,
       }
+
+    default: 
+      return{
+        ...state,
+    }
   }
 }
 
