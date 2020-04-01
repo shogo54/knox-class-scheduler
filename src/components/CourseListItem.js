@@ -6,7 +6,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
@@ -14,13 +13,12 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import DeleteIcon from '@material-ui/icons/Delete';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import AddIcon from '@material-ui/icons/Add';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import SchoolIcon from '@material-ui/icons/School';
-import CloseIcon from '@material-ui/icons/Close';
 
 import * as actionTypes from '../store/actions';
+import CourseIconButton from './CourseIconButton';
 
 const useStyles = makeStyles(theme => ({
   nested: {
@@ -56,10 +54,6 @@ const useStyles = makeStyles(theme => ({
       margin: theme.spacing(0.5),
     },
   },
-  closeButton: {
-    float: 'right',
-    color: theme.palette.grey[500],
-  },
 }));
 
 export default function CourseListItem(props) {
@@ -68,8 +62,6 @@ export default function CourseListItem(props) {
   const [open, setOpen] = React.useState(false);
 
   const dispatch = useDispatch();
-
-  let courseItemButton = null;
   let courseName = "";
   let modalButton = null;
 
@@ -107,18 +99,6 @@ export default function CourseListItem(props) {
         Remove from My Course
       </Button>
     );
-    courseItemButton = (
-      <ListItemSecondaryAction>
-        <IconButton 
-          edge="end"
-          aria-label="delete"
-          color="secondary"
-          onClick={()=>dispatch({type: actionTypes.REMOVE_COURSE, courseCode: props.code})}
-        >
-          <DeleteIcon />
-        </IconButton>
-      </ListItemSecondaryAction>
-    );
   }else{
     modalButton = (
       <Button
@@ -129,18 +109,6 @@ export default function CourseListItem(props) {
       >
         Add to My Course
       </Button>
-    );
-    courseItemButton = (
-      <ListItemSecondaryAction>
-        <IconButton 
-          edge="end" 
-          aria-label="add"
-          color="primary"
-          onClick={()=>dispatch({type: actionTypes.ADD_COURSE, courseCode: props.code})}
-        >
-          <AddCircleIcon />
-        </IconButton>
-      </ListItemSecondaryAction>
     );
   }
 
@@ -163,7 +131,13 @@ export default function CourseListItem(props) {
         <ListItemText className={classes.coursePeriod}>
           {props.days + " " + props.period}
         </ListItemText>
-        {courseItemButton}
+        <ListItemSecondaryAction>
+          <CourseIconButton 
+            type={(props.added)? "remove": "add"}
+            onClick={(props.added)? ()=>dispatch({type: actionTypes.REMOVE_COURSE, courseCode: props.code}):
+            ()=>dispatch({type: actionTypes.ADD_COURSE, courseCode: props.code})}
+          />
+        </ListItemSecondaryAction>
       </ListItem>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -179,9 +153,7 @@ export default function CourseListItem(props) {
       >
         <Fade in={open}>
           <Box className={classes.paper}>
-            <IconButton aria-label="close" className={classes.closeButton} onClick={handleClose}>
-              <CloseIcon />
-            </IconButton>
+            <CourseIconButton type="close" onClick={handleClose}/>
             <h2 id="transition-modal-title">{props.code + " --- " + props.name}</h2>
             <h3 id="transition-modal-faculty">by {props.faculty}</h3>
             <Box className={classes.chips}>
