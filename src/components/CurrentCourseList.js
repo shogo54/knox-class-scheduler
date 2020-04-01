@@ -4,12 +4,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
-import ClearIcon from '@material-ui/icons/Clear';
 
-import CourseListItem from './CourseListItem';
-import Title from './Title';
 import * as actionTypes from '../store/actions';
+import CourseListItem from './CourseListItem';
+import CourseButton from './CourseButton';
+import Title from './Title';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -53,23 +52,6 @@ export default function CurrentCourseList() {
 
   const dispatch = useDispatch();
 
-  let removeAllButton = null; 
-
-  if(currCourses.length > 0){
-    removeAllButton = (
-      <Box display="flex" justifyContent="flex-end">
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={() => dispatch({type: actionTypes.REMOVE_ALL_COURSES})}
-          startIcon={<ClearIcon />}
-        >
-          Remove All Courses
-        </Button>
-      </Box>
-    );
-  }
-
   const renderCurrentCources = () => {
     if (currCourses.length === 0){
       return <Typography className={classes.subText}>No classes are added yet.</Typography>
@@ -102,7 +84,10 @@ export default function CurrentCourseList() {
       <List className={classes.list}>
         {renderCurrentCources()}
       </List>
-      {removeAllButton}
+      {(currCourses.length > 0)? 
+        <CourseButton type="remove-all" onClick={() => dispatch({type: actionTypes.REMOVE_ALL_COURSES})}/>
+        :null
+      }
     </Box>
   );
 }

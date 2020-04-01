@@ -7,18 +7,16 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import DeleteIcon from '@material-ui/icons/Delete';
-import AddIcon from '@material-ui/icons/Add';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import SchoolIcon from '@material-ui/icons/School';
 
 import * as actionTypes from '../store/actions';
 import CourseIconButton from './CourseIconButton';
+import CourseButton from './CourseButton';
 
 const useStyles = makeStyles(theme => ({
   nested: {
@@ -63,7 +61,6 @@ export default function CourseListItem(props) {
 
   const dispatch = useDispatch();
   let courseName = "";
-  let modalButton = null;
 
   if(props.isCurrCourse){
     courseName = props.code + " (" + props.credit + ")";
@@ -88,30 +85,6 @@ export default function CourseListItem(props) {
     setOpen(false);
   };
 
-  if(props.added){
-    modalButton = (
-      <Button
-        variant="contained"
-        color="secondary"
-        onClick={handleAddOrRemove}
-        startIcon={<DeleteIcon />}
-      >
-        Remove from My Course
-      </Button>
-    );
-  }else{
-    modalButton = (
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleAddOrRemove}
-        startIcon={<AddIcon />}
-      >
-        Add to My Course
-      </Button>
-    );
-  }
-
   return (
     <Box className={(props.isCurrCourse)? null: classes.nested}>
       <ListItem 
@@ -132,11 +105,7 @@ export default function CourseListItem(props) {
           {props.days + " " + props.period}
         </ListItemText>
         <ListItemSecondaryAction>
-          <CourseIconButton 
-            type={(props.added)? "remove": "add"}
-            onClick={(props.added)? ()=>dispatch({type: actionTypes.REMOVE_COURSE, courseCode: props.code}):
-            ()=>dispatch({type: actionTypes.ADD_COURSE, courseCode: props.code})}
-          />
+          <CourseIconButton type={(props.added)? "remove":"add"} onClick={handleAddOrRemove}/>
         </ListItemSecondaryAction>
       </ListItem>
       <Modal
@@ -167,9 +136,7 @@ export default function CourseListItem(props) {
               />
             </Box>
             <p id="transition-modal-description">{(props.description)? props.description: "No descrption is provided."}</p>
-            <Box display="flex" justifyContent="flex-end">
-              {modalButton}
-            </Box>
+            <CourseButton type={(props.added)? "remove":"add"} onClick={handleAddOrRemove}/>
           </Box>
         </Fade>
       </Modal>
