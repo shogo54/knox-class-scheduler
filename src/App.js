@@ -8,6 +8,7 @@ import './App.css';
 import SubjectList from './components/SubjectList';
 import CurrentCourseList from './components/CurrentCourseList';
 import MenuAppBar from './components/MenuAppBar';
+import CurrentSchedule from './components/CurrentSchedule';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,7 +37,10 @@ export default function App() {
         <MenuAppBar />
         <Grid container justify='center'>
           <SubjectList />
-          <CurrentCourseList />
+          <Box>
+            <CurrentCourseList />
+            <CurrentSchedule />
+          </Box>
         </Grid>
       </Box>
     </ThemeProvider>

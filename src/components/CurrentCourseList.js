@@ -13,7 +13,7 @@ import Title from './Title';
 const useStyles = makeStyles(theme => ({
   root: {
     width: 450,
-    height: 560,
+    height: '55%',
     background: '#3567CC',
     marginTop: 15,
     marginBottom: 15,
