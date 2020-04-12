@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -36,7 +36,7 @@ export default function SubjectListItem(props) {
   }
 
   return (
-    <div>
+    <Fragment>
       <ListItem 
         button 
         onClick={handleClick}
@@ -51,6 +51,6 @@ export default function SubjectListItem(props) {
           {renderCources()}
         </List>
       </Collapse>
-    </div>
+    </Fragment>
   );
 }
